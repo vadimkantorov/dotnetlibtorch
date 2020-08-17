@@ -1,3 +1,8 @@
+In this [example](./dotnetlibtorch.cs):
+1. We create a DLPack tensor in C# ([`dotnetlibtorch.cs`](./dotnetlibtorch.cs))
+2. Pass it to C function that uses libtorch to process the input ([`dotnetlibtorch.cpp`](./dotnetlibtorch.cpp))
+3. Display the returned tensor in C# ([`dotnetlibtorch.cs`](./dotnetlibtorch.cs))
+
 ```shell
 # build C++ library with an exported C function that consumes a DLPack tensor and returns a DLPack tensor
 # C++ library dotnetlibtorch.cpp adds 1 to the passed tensor
