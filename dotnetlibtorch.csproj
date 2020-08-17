@@ -4,11 +4,10 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-    <!--<None Update="libdotnetlibtorch.so" CopyToOutputDirectory="PreserveNewest" />-->
-  <ContentWithTargetPath Include="build/libdotnetlibtorch.so">
+     <ContentWithTargetPath Include="build/libdotnetlibtorch.so">
 	<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	<TargetPath>libdotnetlibtorch.so</TargetPath>
-  </ContentWithTargetPath>
+     </ContentWithTargetPath>
   </ItemGroup>
 
   
