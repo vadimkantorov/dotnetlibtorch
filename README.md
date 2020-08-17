@@ -14,8 +14,9 @@ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$CMAKE_PREFIX_PATH" ..
 make
 popd
 ```
+
 ### Running the example
-```
+```shell
 # build and run C# caller
 dotnet run dotnetlibtorch.cs
 ```
