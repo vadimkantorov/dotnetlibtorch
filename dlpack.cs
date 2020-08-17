@@ -1,3 +1,5 @@
+// Source: https://github.com/vadimkantorov/dotnetdlpack/blob/master/dlpack.cs
+
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices; 
