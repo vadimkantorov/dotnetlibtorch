@@ -44,7 +44,7 @@ namespace DLPackTest
 				Console.WriteLine(output.dl_tensor);
 				PrintMatrix<Int32>(in output.dl_tensor);
 				
-				// Calling deleter. If your library function returns a Tensor managed by PyTorch, this would free the memory.
+				// Calling the DLPack deleter. If your library function returns a Tensor managed by PyTorch, this would free the memory.
 				output.CallDeleter();
 			}
 		}
