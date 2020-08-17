@@ -46,6 +46,7 @@ namespace DLPackTest
 				
 				// Calling the DLPack deleter. If your library function returns a Tensor managed by PyTorch, this would free the memory.
 				output.CallDeleter();
+				Console.WriteLine("Called deleter");
 			}
 		}
 	}

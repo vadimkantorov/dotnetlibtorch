@@ -30,4 +30,5 @@ type_code=kDLInt, bits=32, lanes=1, ndim=2, shape=[2,3], strides=[3,1]
 (1, 0) = 4
 (1, 1) = 5
 (1, 2) = 6
+Called deleter
 ```
