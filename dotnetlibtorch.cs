@@ -44,16 +44,15 @@ namespace DotNetLibTorch
 				{0, 1, 2},
 				{3, 4, 5}
 			};
-			var shape = DLTensor.ShapeFromArray(data);
-			var strides = DLTensor.RowMajorContiguousStrides(shape);
-
+			
 			fixed(Int32* ptr_data = data)
-			fixed(Int64* ptr_shape = shape)
-			fixed(Int64* ptr_strides = strides)
+			fixed(Int64* ptr_shape = DLTensor.ShapeFromArray(data))
 			{
 				// Passing strides is optional. If no strides are passed, libtorch assumes row-major contiguous strides
+				// You can explicitly construct them with Int64[] strides = DLTensor.RowMajorContiguousStrides(shape: DLTensor.ShapeFromArray(data)) and pass the pinned pointer to FromBlob
+
 				Console.WriteLine("Before passing to libtorch");
-				DLManagedTensor input = DLManagedTensor.FromBlob(ptr_data, data.Rank, ptr_shape, ptr_strides);
+				DLManagedTensor input = DLManagedTensor.FromBlob(ptr_data, data.Rank, ptr_shape);
 				Console.WriteLine(input.dl_tensor);
 				PrintMatrix<Int32>(in input.dl_tensor);
 				
