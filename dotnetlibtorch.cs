@@ -45,7 +45,7 @@ namespace DotNetLibTorch
 				{3, 4, 5}
 			};
 			var shape = DLTensor.ShapeFromArray(data);
-			var strides = DLTensor.RowMajorContiguousTensorStrides(shape);
+			var strides = DLTensor.RowMajorContiguousStrides(shape);
 
 			fixed(Int32* ptr_data = data)
 			fixed(Int64* ptr_shape = shape)
