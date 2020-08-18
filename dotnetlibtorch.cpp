@@ -39,6 +39,7 @@ extern "C" DLManagedTensor process_dlpack_with_libtorch(DLManagedTensor dl_manag
 {
 	torch::Tensor tensor = at::fromDLPack(&dl_managed_tensor_in);
 	
+	torch::NoGradGuard no_grad;
 	auto res = tensor + 1;
 
 	return *at::toDLPack(res);
