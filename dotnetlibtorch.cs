@@ -24,8 +24,7 @@ namespace DotNetLibTorch
 		public static extern void destroy_model(IntPtr inference_session);
 		
 		[DllImport(nameof(dotnetlibtorch))]
-		public static extern  DLManagedTensor run_model(IntPtr inference_session, DLManagedTensor dl_managed_tensor_in)
-	
+		public static extern DLManagedTensor run_model(IntPtr inference_session, DLManagedTensor dl_managed_tensor_in);
 	}
 	
 	class Test
