@@ -18,7 +18,7 @@ namespace DLPackTest
 		public static extern DLManagedTensor process_dlpack_with_libtorch(DLManagedTensor dl_managed_tensor);
 		
 		[DllImport("dotnetlibtorch", CharSet = CharSet.Ansi)]
-		public static extern IntPtr load_model([MarshalAs(UnmanagedType.LPStr)]string jit_scripted_serialized_model_path, DeviceType device_type = DeviceType.CPU, Int16 device_id = 0)
+		public static extern IntPtr load_model([MarshalAs(UnmanagedType.LPStr)]string jit_scripted_serialized_model_path, DeviceType device_type = DeviceType.CPU, Int16 device_id = -1)
 
 		[DllImport("dotnetlibtorch")]
 		public static extern void destroy_model(IntPtr inference_session);
