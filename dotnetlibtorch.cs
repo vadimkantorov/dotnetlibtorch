@@ -31,7 +31,7 @@ namespace DotNetLibTorch
 	{
 		public static void PrintMatrix<T>(in DLTensor dl_tensor) where T : unmanaged
 		{
-			Debug.Assert(dl_tensor.CheckType<T, T>());
+			Debug.Assert(dl_tensor.ndim == 2 && dl_tensor.CheckType<T, T>());
 			var shape = dl_tensor.ShapeSpan();
 			for(var r = 0; r < shape[0]; r++)
 				for(var c = 0; c < shape[1]; c++)
