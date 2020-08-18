@@ -17,11 +17,17 @@ popd
 
 ### Running the example
 ```shell
-# build and run C# caller
-dotnet run dotnetlibtorch.cs
-
 # dump export a linear PyTorch model in two versions: jit_scripted_model.pt and jit_traced_model.pt
 python3 dotnetlibtorch.py
+
+# run C# caller that only does processing in PyTorch code
+dotnet run dotnetlibtorch.cs
+
+# run C# caller that uses JIT scripted model for processing
+dotnet run dotnetlibtorch.cs jit_scripted_model.pt
+
+# run C# caller that uses JIT scripted model for processing
+dotnet run dotnetlibtorch.cs jit_traced_model.pt
 ```
 
 ### Example output
