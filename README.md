@@ -1,7 +1,8 @@
 In this [example](./dotnetlibtorch.cs):
-1. We create a DLPack tensor in C# ([`dotnetlibtorch.cs`](./dotnetlibtorch.cs))
-2. Pass it to C function that uses libtorch to process the input ([`dotnetlibtorch.cpp`](./dotnetlibtorch.cpp))
-3. Display the returned tensor in C# ([`dotnetlibtorch.cs`](./dotnetlibtorch.cs))
+1. Export traced and scripted models from PyTorch code in Python ([`dotnetlibtorch.py`](./dotnetlibtorch.py))
+2. We create a DLPack tensor in C# ([`dotnetlibtorch.cs`](./dotnetlibtorch.cs))
+3. Pass it to C function that uses libtorch and provided model to process the input ([`dotnetlibtorch.cpp`](./dotnetlibtorch.cpp))
+4. Display the returned tensor in C# ([`dotnetlibtorch.cs`](./dotnetlibtorch.cs))
 
 ### Build instructions
 ```shell
