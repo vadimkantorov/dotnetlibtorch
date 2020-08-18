@@ -49,7 +49,7 @@ namespace DLPack
 			else if(t == typeof(Single) || t == typeof(Double))
 				dtype.type_code = DLDataTypeCode.kDLFloat;
 			else
-				throw new Exception($"Type [{typeof(T)}] is not supported");
+				throw new Exception($"Type [{t}] is not supported");
 			return dtype;
 		}
 	}
