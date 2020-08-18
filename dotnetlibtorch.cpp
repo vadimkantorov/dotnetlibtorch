@@ -15,9 +15,8 @@ struct LibTorchInferenceSession
 
 extern "C" LibTorchInferenceSession* load_model(const char* jit_scripted_serialized_model_path, c10::DeviceType device_type = at::kCPU, int16_t device_id = 0)
 {
-	torch::jit::script::Module model = torch::jit::load(jit_scripted_serialized_model_path);
 	c10::Device device(device_type, device_id);
-	model = model.to(device);
+	torch::jit::script::Module model = torch::jit::load(jit_scripted_serialized_model_path, device);
 	return new LibTorchInferenceSession { model, device };
 }
 
