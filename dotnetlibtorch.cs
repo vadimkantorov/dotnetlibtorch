@@ -58,7 +58,16 @@ namespace DotNetLibTorch
 				PrintMatrix<Int32>(in input.dl_tensor);
 				
 				Console.WriteLine("After passing to libtorch");
-				DLManagedTensor output = dotnetlibtorch.process_dlpack_with_libtorch(input);
+				DLManagedTensor output;
+				if(args.Length > 1)
+				{
+					var inference_session = dotnetlibtorch.load_model(args[1]);
+					output = dotnetlibtorch.run_model(inference_session, input);
+					dotnetlibtorch.destroy_model(inference_session);
+				}
+				else
+					output = dotnetlibtorch.process_dlpack_with_libtorch(input);
+				
 				Console.WriteLine(output.dl_tensor);
 				PrintMatrix<Int32>(in output.dl_tensor);
 				
