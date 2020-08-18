@@ -95,7 +95,7 @@ namespace DLPack
 		
 		public unsafe ReadOnlySpan<Int64> StridesSpan(bool assumeRowMajorContiguousStrides = false)
 		{
-			return strides != IntPtr.Zero ? new ReadOnlySpan<Int64>(strides.ToPointer(), ndim) : assumeRowMajorContiguousStrides ? RowMajorContiguousTensorStrides(ShapeSpan()) : ReadOnlySpan<Int64>.Empty; 
+			return strides != IntPtr.Zero ? new ReadOnlySpan<Int64>(strides.ToPointer(), ndim) : assumeRowMajorContiguousStrides ? RowMajorContiguousStrides(ShapeSpan()) : ReadOnlySpan<Int64>.Empty; 
 		}
 
 		public unsafe ReadOnlySpan<T> DataSpanLessThan2Gb<T>() where T : unmanaged
@@ -122,7 +122,7 @@ namespace DLPack
 			return $"type_code={dtype.type_code}, bits={dtype.bits}, lanes={dtype.lanes}, ndim={ndim}, shape=[{s_h_a_p_e}], strides=[{s_t_r_i_d_e_s}]"; 
 		}
 
-		public static Int64[] RowMajorContiguousTensorStrides(ReadOnlySpan<Int64> shape)
+		public static Int64[] RowMajorContiguousStrides(ReadOnlySpan<Int64> shape)
 		{
 			var strides = new Int64[shape.Length];
 			for(Int32 i = 0; i < strides.Length; i++)
