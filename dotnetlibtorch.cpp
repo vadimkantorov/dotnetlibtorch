@@ -13,14 +13,14 @@ struct LibTorchInferenceSession
 	c10::Device device;
 };
 
-extern "C" LibTorchInferenceSession* load_model(const char* jit_scripted_serialized_model_path, c10::DeviceType device_type = at::kCPU, int16_t device_id = 0)
+extern "C" LibTorchInferenceSession* load_model(const char* jit_scripted_serialized_model_path, c10::DeviceType device_type = c10::DeviceType::CPU, int16_t device_id = 0)
 {
 	c10::Device device(device_type, device_id);
 	torch::jit::script::Module model = torch::jit::load(jit_scripted_serialized_model_path, device);
 	return new LibTorchInferenceSession { model, device };
 }
 
-extern "C" LibTorchInferenceSession* destroy_model(LibTorchInferenceSession* inference_session)
+extern "C" void destroy_model(LibTorchInferenceSession* inference_session)
 {
 	delete inference_session;
 }
