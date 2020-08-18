@@ -40,14 +40,14 @@ namespace DotNetLibTorch
 		
 		public static unsafe void Main(string[] args)
 		{
-			var data = new Int32[2, 3] {
-				{0, 1, 2},
-				{3, 4, 5}
+			var data = new Single[2, 3] {
+				{0.0f, 1.0f, 2.0f},
+				{3.0f, 4.0f, 5.0f}
 			};
 			var device_type = dotnetlibtorch.DeviceType.CPU;
 			Int16 device_index = -1;
 			
-			fixed(Int32* ptr_data = data)
+			fixed(Single* ptr_data = data)
 			fixed(Int64* ptr_shape = DLTensor.ShapeFromArray(data))
 			{
 				// Passing strides is optional. If no strides are passed, libtorch assumes row-major contiguous strides
@@ -56,7 +56,7 @@ namespace DotNetLibTorch
 				Console.WriteLine("Before passing to libtorch");
 				DLManagedTensor input = DLManagedTensor.FromBlob(ptr_data, data.Rank, ptr_shape);
 				Console.WriteLine(input.dl_tensor);
-				PrintMatrix<Int32>(in input.dl_tensor);
+				PrintMatrix<Single>(in input.dl_tensor);
 				
 				Console.WriteLine("After passing to libtorch");
 				DLManagedTensor output;
@@ -70,7 +70,7 @@ namespace DotNetLibTorch
 					output = dotnetlibtorch.process_dlpack_with_libtorch(input);
 				
 				Console.WriteLine(output.dl_tensor);
-				PrintMatrix<Int32>(in output.dl_tensor);
+				PrintMatrix<Single>(in output.dl_tensor);
 				
 				// Calling the DLPack deleter. If your library function returns a Tensor managed by PyTorch, this would free the memory.
 				output.CallDeleter();
