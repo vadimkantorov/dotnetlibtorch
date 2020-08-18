@@ -17,6 +17,7 @@ extern "C" LibTorchInferenceSession* load_model(const char* jit_scripted_seriali
 {
 	c10::Device device(device_type, device_id);
 	torch::jit::script::Module model = torch::jit::load(jit_scripted_serialized_model_path, device);
+	model.eval();
 	return new LibTorchInferenceSession { model, device };
 }
 
@@ -29,10 +30,9 @@ extern "C"  DLManagedTensor run_model(LibTorchInferenceSession* inference_sessio
 {
 	torch::Tensor tensor = at::fromDLPack(&dl_managed_tensor_in);
 	
-	std::vector<torch::jit::IValue> inputs {tensor.to(inference_session->device)};
-	auto outputs = inference_session->model.forward(inputs);
+	torch::NoGradGuard no_grad;
+	auto res = inference_session->model.forward({tensor.to(inference_session->device)}).toTensor().to(c10::DeviceType::CPU);
 	
-	auto res = outputs.toTensor().to(c10::DeviceType::CPU);
 	return *at::toDLPack(res);
 }
 
