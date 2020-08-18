@@ -1,5 +1,5 @@
 #include <iostream>
-#include <ctype>
+#include <cctype>
 
 #include <torch/torch.h>
 #include <torch/script.h>
@@ -28,9 +28,11 @@ extern "C" void destroy_model(LibTorchInferenceSession* inference_session)
 extern "C"  DLManagedTensor run_model(LibTorchInferenceSession* inference_session, DLManagedTensor dl_managed_tensor_in)
 {
 	torch::Tensor tensor = at::fromDLPack(&dl_managed_tensor_in);
-	tensor = tensor.to(inference_session->device);
-	autor res = inference_session->model(tensor);
-	res = res.to(at::kCPU);
+	
+	std::vector<torch::jit::IValue> inputs {tensor.to(inference_session->device)};
+	auto outputs = inference_session->model.forward(inputs);
+	
+	auto res = outputs.toTensor().to(c10::DeviceType::CPU);
 	return *at::toDLPack(res);
 }
 
