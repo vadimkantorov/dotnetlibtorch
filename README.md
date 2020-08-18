@@ -19,6 +19,9 @@ popd
 ```shell
 # build and run C# caller
 dotnet run dotnetlibtorch.cs
+
+# dump export a linear PyTorch model in two versions: jit_scripted_model.pt and jit_traced_model.pt
+python3 dotnetlibtorch.py
 ```
 
 ### Example output
