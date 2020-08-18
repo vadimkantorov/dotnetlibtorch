@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using DLPack;
 
-namespace DLPackTest
+namespace DotNetLibTorch
 {
-	class Test
+	static class dotnetlibtorch
 	{
-		enum DeviceType : Int16
+		public enum DeviceType : Int16
 		{
 			CPU = 0,
   			CUDA = 1
@@ -18,14 +18,18 @@ namespace DLPackTest
 		public static extern DLManagedTensor process_dlpack_with_libtorch(DLManagedTensor dl_managed_tensor);
 		
 		[DllImport("dotnetlibtorch", CharSet = CharSet.Ansi)]
-		public static extern IntPtr load_model([MarshalAs(UnmanagedType.LPStr)]string jit_scripted_serialized_model_path, DeviceType device_type = DeviceType.CPU, Int16 device_id = -1)
+		public static extern IntPtr load_model([MarshalAs(UnmanagedType.LPStr)]string jit_scripted_serialized_model_path, DeviceType device_type = DeviceType.CPU, Int16 device_id = -1);
 
 		[DllImport("dotnetlibtorch")]
 		public static extern void destroy_model(IntPtr inference_session);
 		
 		[DllImport("dotnetlibtorch")]
 		public static extern  DLManagedTensor run_model(IntPtr inference_session, DLManagedTensor dl_managed_tensor_in)
-		
+	
+	}
+	
+	class Test
+	{
 		public static void PrintMatrix<T>(in DLTensor dl_tensor) where T : unmanaged
 		{
 			Debug.Assert(dl_tensor.CheckType<T, T>());
@@ -55,7 +59,7 @@ namespace DLPackTest
 				PrintMatrix<Int32>(in input.dl_tensor);
 				
 				Console.WriteLine("After passing to libtorch");
-				DLManagedTensor output = process_dlpack_with_libtorch(input);
+				DLManagedTensor output = dotnetlibtorch.process_dlpack_with_libtorch(input);
 				Console.WriteLine(output.dl_tensor);
 				PrintMatrix<Int32>(in output.dl_tensor);
 				
