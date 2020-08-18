@@ -8,8 +8,23 @@ namespace DLPackTest
 {
 	class Test
 	{
+		enum DeviceType : Int16
+		{
+			CPU = 0,
+  			CUDA = 1
+		}
+		
 		[DllImport("dotnetlibtorch")]
 		public static extern DLManagedTensor process_dlpack_with_libtorch(DLManagedTensor dl_managed_tensor);
+		
+		[DllImport("dotnetlibtorch", CharSet = CharSet.Ansi)]
+		public static extern IntPtr load_model([MarshalAs(UnmanagedType.LPStr)]string jit_scripted_serialized_model_path, DeviceType device_type = DeviceType.CPU, Int16 device_id = 0)
+
+		[DllImport("dotnetlibtorch")]
+		public static extern void destroy_model(IntPtr inference_session);
+		
+		[DllImport("dotnetlibtorch")]
+		public static extern  DLManagedTensor run_model(IntPtr inference_session, DLManagedTensor dl_managed_tensor_in)
 		
 		public static void PrintMatrix<T>(in DLTensor dl_tensor) where T : unmanaged
 		{
