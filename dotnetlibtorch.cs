@@ -44,6 +44,8 @@ namespace DotNetLibTorch
 				{0, 1, 2},
 				{3, 4, 5}
 			};
+			var device_type = dotnetlibtorch.DeviceType.CPU;
+			Int16 device_index = -1;
 			
 			fixed(Int32* ptr_data = data)
 			fixed(Int64* ptr_shape = DLTensor.ShapeFromArray(data))
@@ -61,7 +63,7 @@ namespace DotNetLibTorch
 				if(args.Length > 1)
 				{
 					var inference_session = dotnetlibtorch.load_model(args[1]);
-					output = dotnetlibtorch.run_model(inference_session, input);
+					output = dotnetlibtorch.run_model(inference_session, input, device_type, device_index);
 					dotnetlibtorch.destroy_model(inference_session);
 				}
 				else
