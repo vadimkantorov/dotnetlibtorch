@@ -31,6 +31,7 @@ namespace DotNetLibTorch
 	{
 		public static void PrintMatrix<T>(in DLTensor dl_tensor) where T : unmanaged
 		{
+			Console.WriteLine(dl_tensor);
 			Debug.Assert(dl_tensor.ndim == 2 && dl_tensor.CheckType<T, T>());
 			var shape = dl_tensor.ShapeSpan();
 			for(var r = 0; r < shape[0]; r++)
@@ -55,7 +56,6 @@ namespace DotNetLibTorch
 
 				Console.WriteLine("Before passing to libtorch");
 				DLManagedTensor input = DLManagedTensor.FromBlob(ptr_data, data.Rank, ptr_shape);
-				Console.WriteLine(input.dl_tensor);
 				PrintMatrix<Single>(in input.dl_tensor);
 				
 				Console.WriteLine("After passing to libtorch");
@@ -69,7 +69,6 @@ namespace DotNetLibTorch
 				else
 					output = dotnetlibtorch.process_dlpack_with_libtorch(input);
 				
-				Console.WriteLine(output.dl_tensor);
 				PrintMatrix<Single>(in output.dl_tensor);
 				
 				// Calling the DLPack deleter. If your library function returns a Tensor managed by PyTorch, this would free the memory.
